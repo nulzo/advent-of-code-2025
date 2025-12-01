@@ -206,3 +206,5 @@ __marimo__/
 aoc_utils.py
 generate_day.py
 run_day.py
+Makefile
+day[0-9][0-9]/day[0-9][0-9]
