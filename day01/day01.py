@@ -7,55 +7,56 @@ sys.path.append(str(project_root))
 from aoc_utils import *
 
 def part1(data):
+    """
+    count how many times we land exactly on 0
+
+    - start at position 50 on a cyclical track from 0 to 99
+    - each move is either right or left by some amount
+    - count each time our final position after a move is exactly 0
+    """
     lines = data.strip().split('\n')
     c_pos, c_zero = 50, 0
-    
+
     for l in lines:
         l = l.strip()
         if not l: continue
-        
+
         dir, amt = l[0], int(l[1:])
+        # move to wrap around, modulating to find where we end up
         c_pos = (c_pos + (1 if dir == 'R' else -1) * amt) % 100
-        # print("chat, we have position", c_pos)
-        if c_pos == 0:
-            print("erm, we just got 0")
-            
+        # increment the count if we're on a 0
         c_zero += 1 if not c_pos else 0
-    
+
     return c_zero
 
 
 def part2(data):
+    """
+    count how many times we pass thru 0 during moves
+
+    - same as first one with starting pos and size
+    - count every time we pass thru 0
+    - important! it can include large moves that can pass thru more than once
+    """
     lines = data.strip().split('\n')
     c_pos, c_zero = 50, 0
-    
+
     for l in lines:
         l = l.strip()
         if not l: continue
         dir, amt = l[0], int(l[1:])
-        cnt = amt
         if dir == 'R':
-            dist = (100 - c_pos) % 100
-            if dist == 0: dist = 100
-            
-            if cnt >= dist:
-                c_zero += 1
-                cnt -= dist
-                c_zero += cnt // 100
-                # print("erm...", cnt, dist)
-                # print("chat, we cnt 0", c_zero)
-                
+            # moving right
+            # (c_pos + amt) // 100 counts how many times we crossed 0
+            # i.e. if pos 50, move 60 right -> 50+60=110, 110//100=1
+            c_zero += (c_pos + amt) // 100
             c_pos = (c_pos + amt) % 100
-            
         elif dir == 'L':
-            dist = c_pos
-            if dist == 0: dist = 100
-            
-            if cnt >= dist:
-                c_zero += 1
-                cnt -= dist
-                c_zero += cnt // 100
-            
+            # moving left
+            # amt // 100 + (1 if c_pos < amt % 100 else 0)
+            # check full wraps from large jumps, then check if we crossed 0
+            # i.e. if pos 10, move 20 left -> crosses 1 if 10 < 20%100=20
+            c_zero += amt // 100 + (1 if c_pos < amt % 100 else 0)
             c_pos = (c_pos - amt) % 100
 
     return c_zero
