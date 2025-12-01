@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "advent-of-code-2025"
+version = "0.1.0"
+description = ""
+authors = ["nulzo <nolanpgregory@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+[tool.poetry.scripts]
+generate-day = "generate_day:main"
+run-day = "run_day:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
