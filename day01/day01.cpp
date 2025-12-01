@@ -4,9 +4,12 @@
 #include <vector>
 #include <numeric>
 
+// thanks to @spice for showing me how to do this and
+// how to write good c++! :dog_smiling:
 using namespace std;
 
-// not great, TODO: come back later to extract to util header and make better
+// not great right now
+// TODO: come back later to extract to util header and make better
 vector<string> read_lines(const string &filename)
 {
     vector<string> lines;
