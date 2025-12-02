@@ -204,7 +204,12 @@ __marimo__/
 
 # my custom AOC scripts
 aoc_utils.py
+AocUtils.cs
+aoc_utils.cpp
+aoc_utils.hpp
+aoc_utils.h
 generate_day.py
 run_day.py
 Makefile
 day[0-9][0-9]/day[0-9][0-9]
+day[0-9][0-9]/day[0-9][0-9].exe
