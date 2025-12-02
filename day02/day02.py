@@ -35,9 +35,9 @@ def part2(data):
             ln = len(s)
             for l in range(1, ln // 2 + 1):
                 if ln % l == 0:
-                    pattern = s[:l]
-                    repeats = ln // l
-                    if pattern * repeats == s:
+                    p = s[:l]
+                    r = ln // l
+                    if p * r == s:
                         inv += n
                         break
     return inv
