@@ -38,21 +38,8 @@ def part1(data):
 
 
 def part2(data):
-    # setlled on greedy grabbing items while respecting OG order. probably will clean this later or try to make it better
-    tj= 0
-    for l in data.strip().split('\n'):
-        r = []
-        curr = l
-        for i in range(12, 0, -1):
-            # sliding window
-            win = curr[:len(curr)-(i-1)]
-            # important! it needs to always get the biggest in the windw
-            r.append(max(win))
-            # move to idx after the one above
-            curr = curr[curr.find(max(win)) + 1:]
-        tj += int(''.join(r))
-    return tj
-
+    def f(s, k):return ""if k==0 else (m:=max(s[:len(s)-k+1]))+f(s[s.find(m)+1:],k-1)
+    return sum(int(f(l.strip(), 12))for l in data.split('\n')if len(l.strip())>=12)
 
 if __name__ == "__main__":
     try:
