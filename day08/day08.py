@@ -32,7 +32,26 @@ def part1(data):
     return math.prod(sizes)
 
 def part2(data):
-    return 0
+    pts = []
+    prs = []
+    uf = UnionFind()
+    
+    for l in data.strip().split('\n'):
+        pts.append(tuple(map(int, l.split(','))))
+    
+    for i in range(len(pts)):
+        for j in range(i + 1, len(pts)):
+            prs.append((math.dist(pts[i], pts[j]), i, j))
+    
+    prs.sort(key=lambda x: x[0])
+    
+    for i in range(len(pts)): uf.find(i)
+    
+    di, dj = None, None
+    for _, a, b in prs:
+        if uf.union(a, b) and uf.count == 1: di, dj = a, b
+
+    return pts[di][0] * pts[dj][0]
 
 if __name__ == "__main__":
     data = read_input()
